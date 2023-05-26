@@ -53,11 +53,31 @@ streamlit run app.py
 
 The project structure is as follows:
 
-`app.py`: Main Streamlit app script containing the code for filtering data and visualizing graphs.
-`common/`: Directory containing common utility functions for data loading, transformation, and visualization.
-`common/graph.py`: Module for graph-related calculations and metrics.
-`common/load.py`: Module for loading data from files.
-`common/show.py`: Module for displaying images and HTML plots.
-`common/streamlit_widgets.py`: Module for creating custom Streamlit widgets.
-`common/select.py`: Module for data selection and filtering.
-`common/transform.py`: Module for data transformation and manipulation.
+- `app.py`: Main Streamlit app script containing the code for filtering data and visualizing graphs.
+- `common/`: Directory containing common utility functions for data loading, transformation, and visualization.
+- `common/graph.py`: Module for graph-related calculations and metrics.
+- `common/load.py`: Module for loading data from files.
+- `common/show.py`: Module for displaying images and HTML plots.
+- `common/streamlit_widgets.py`: Module for creating custom Streamlit widgets.
+- `common/select.py`: Module for data selection and filtering.
+- `common/transform.py`: Module for data transformation and manipulation.
+
+
+## Data Sources
+The data used in the Movie Graph Visualization app was sourced from The Movie Database (TMDB). The movie data and cast 
+data were obtained by querying TMDB's API. While the code for querying the API is not included in the provided code 
+snippet, if you find it useful, please feel free to reach out for further assistance.
+
+
+## Data Formats
+The data is stored in pickled data frames, which are cached locally in the repository. This format was chosen as it 
+provides a convenient and efficient way to store and load the data. Since the data size was not too large, this 
+approach was suitable for the project.
+
+
+## Limitations
+It's important to note that there are certain limitations to the data used in the app. The earliest available data 
+is from 1990, and the overall dataset is skewed towards the past decade. This limitation is due to the data available 
+through the TMDB API, which may not include comprehensive historical records. However, despite this limitation, 
+the app still offers valuable insights into the relationships and collaborations between actors and movies based 
+on the available data.
