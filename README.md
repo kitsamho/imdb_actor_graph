@@ -1,7 +1,27 @@
 # Movie Graph Visualization
 
-This project is a Streamlit app that allows users to visualize movie graphs and explore the relationships between actors 
-and movies.
+The Movie Graph Visualization app is a Streamlit application that allows users to explore and visualize the 
+relationships between movies and actors. The app provides an interactive interface where users can filter movies based 
+on release year and average rating, as well as filter actors based on popularity and gender. These filters help narrow 
+down the dataset to specific movies and actors of interest.
+
+Once the filters are applied, the app generates a movie graph visualization. The graph represents the connections 
+between actors and movies, where actors are nodes and their collaborations in movies are represented by edges. The size 
+of the nodes indicates the popularity of the actors, and the thickness of the edges represents the frequency of 
+collaborations between actors.
+
+Users can interact with the graph by adjusting the edge frequency threshold. This threshold allows users to control the 
+level of collaboration between actors that is displayed in the graph. By manipulating the threshold, users can focus on 
+highly collaborative actors or explore connections between less frequently collaborating actors.
+
+In addition to the graph visualization, the app provides a section where users can select specific actors and their 
+co-stars. The app then displays the movies in which the selected actors and co-stars have appeared together, along with 
+their corresponding movie posters. This feature allows users to discover common movies and explore the filmography of 
+their favorite actors.
+
+Overall, the Movie Graph Visualization app provides a dynamic and interactive way to explore the relationships and 
+collaborations between actors and movies. It enables users to uncover interesting connections, discover common films, 
+and gain insights into the world of cinema.
 
 ## Installation
 
@@ -28,25 +48,16 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Usage
-
-Set Streamlit page configuration by modifying the st.set_page_config() line in app.py.
-Define the file paths for the movie and cast data in app.py. Make sure the data files are in the specified paths.
-Customize the movie and actor filters in the sidebar by modifying the corresponding sections in app.py.
-Run the Streamlit app as described in the installation steps.
-Use the sliders and select boxes in the sidebar to filter the movie and actor data.
-Explore the movie graph visualization in the "Graph Visualization" section. Adjust the edge frequency threshold using the slider to customize the graph.
-View the films starred in by selecting actors and co-stars in the "Films Starred In" section. The corresponding movie posters will be displayed.
 
 ## Project Structure
 
 The project structure is as follows:
 
-app.py: Main Streamlit app script containing the code for filtering data and visualizing graphs.
-common/: Directory containing common utility functions for data loading, transformation, and visualization.
-common/graph.py: Module for graph-related calculations and metrics.
-common/load.py: Module for loading data from files.
-common/show.py: Module for displaying images and HTML plots.
-common/streamlit_widgets.py: Module for creating custom Streamlit widgets.
-common/select.py: Module for data selection and filtering.
-common/transform.py: Module for data transformation and manipulation.
+`app.py`: Main Streamlit app script containing the code for filtering data and visualizing graphs.
+`common/`: Directory containing common utility functions for data loading, transformation, and visualization.
+`common/graph.py`: Module for graph-related calculations and metrics.
+`common/load.py`: Module for loading data from files.
+`common/show.py`: Module for displaying images and HTML plots.
+`common/streamlit_widgets.py`: Module for creating custom Streamlit widgets.
+`common/select.py`: Module for data selection and filtering.
+`common/transform.py`: Module for data transformation and manipulation.
