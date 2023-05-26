@@ -7,6 +7,23 @@ and movies.
 
 1. Clone the repository:
 
-```shell
+```
 git clone https://github.com/your-username/movie-graph-visualization.git
 cd movie-graph-visualization
+```
+
+2. Create a python 3.1 environment
+
+```
+conda create imdb_actor_graph python==3.10
+```
+
+3. Install requirements
+```
+pip install -r requirements.txt
+```
+
+4. Run app
+```
+streamlit run app.py
+```
