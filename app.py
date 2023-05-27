@@ -50,12 +50,14 @@ df_masked_movies = _select_movie_data(df_movies,
                                       year_start, year_end,
                                       vote_low, vote_high)
 
+
+
 st.sidebar.markdown("----")
-# Actor filters
+
 st.sidebar.header('Actor Filters')
 
 actor_popularity_low, actor_popularity_high = 1.0, 100.0
-actor_popularity_range = st.sidebar.slider('Actor popularity', actor_popularity_low, actor_popularity_high, (25.0, 100.0), 1.0)
+actor_popularity_range = st.sidebar.slider('Popularity', actor_popularity_low, actor_popularity_high, (25.0, 100.0), 1.0)
 actor_popularity_low, actor_popularity_high = actor_popularity_range
 
 gender_choice = _select_gender(st.sidebar.radio('Gender', ['Everyone', 'Male', 'Female']))
