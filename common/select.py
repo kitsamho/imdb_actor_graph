@@ -7,6 +7,11 @@ def _mask_range(df, col, start, end):
 def _mask_value(df, col, value):
     return df[df[col] == value]
 
+
+def _get_min_max_values(df, col, number_type):
+    min_value, max_value = number_type(df[col].min()), number_type(df[col].max())
+    return min_value, max_value
+
 def _select_movie_data(df_movies,year_start, year_end=None,
                        # revenue_low=None, revenue_high=None,
                        # budget_low=None, budget_high=None,

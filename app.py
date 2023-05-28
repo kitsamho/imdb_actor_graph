@@ -7,7 +7,7 @@ from common.load import read_data, _load_cached_file
 from common.show import _cache_d3_network_plot, plot_html, display_image_grid
 from common.streamlit_widgets import create_range_slider
 from common.select import _select_movie_data, _select_cast_data, _mask_on_actor_edge_frequency, _mask_range, \
-    _get_actor_co_star_dict, _get_poster_paths, _find_common_movies, _mask_value, _select_gender
+    _get_actor_co_star_dict, _get_poster_paths, _find_common_movies, _mask_value, _select_gender, _get_min_max_values
 from common.transform import join_movies_cast, _get_nested_cast, _get_nested_cast_combinations, \
     _flatten_nested_cast_combinations, _get_combinations_dict, _get_d3_dataframe, _get_edge_frequency_dict
 
@@ -28,27 +28,24 @@ movies_path = os.path.join(data_path, movies_data)
 df_movies = read_data(movies_path)
 df_cast = read_data(cast_path)
 
+df_merged = join_movies_cast(df_cast, df_movies)
+
 
 #### Movies Section
 st.sidebar.header('Movie Filters')
 
 # filter on movie year
-year_range = st.sidebar.slider('Year of release', 1990, 2023, (2018, 2023), 1)
-year_start, year_end = year_range
+min_year, max_year = _get_min_max_values(df_merged, 'm_release_year', int)
+year_start, year_end = st.sidebar.slider('Year of release', min_year, max_year, (2018, 2023), 1)
+df_merged = _mask_range(df_merged, 'm_release_year', year_start, year_end)
 
-df_movies = _mask_range(df_movies, 'm_release_year', year_range[0], year_range[1])
+min_vote, max_vote = _get_min_max_values(df_merged, 'm_vote_average', float)
+vote_start, vote_end = st.sidebar.slider('Average movie rating', min_vote, max_vote, \
+                               (6.0, max_vote), 0.1)
 
-vote_low_slider, vote_high_slider = float(df_movies.m_vote_average.min()), float(df_movies.m_vote_average.max())
-
-vote_range = st.sidebar.slider('Average movie rating', vote_low_slider, vote_high_slider, \
-                               (6.0, vote_high_slider), 0.1)
-vote_low, vote_high = vote_range
-
-
-# Filter movie data
-df_masked_movies = _select_movie_data(df_movies,
-                                      year_start, year_end,
-                                      vote_low, vote_high)
+df_merged = _select_movie_data(df_merged,
+                              year_start, year_end,
+                              vote_start, vote_end)
 
 
 
@@ -56,20 +53,24 @@ st.sidebar.markdown("----")
 
 st.sidebar.header('Actor Filters')
 
-actor_popularity_low, actor_popularity_high = 1.0, 100.0
-actor_popularity_range = st.sidebar.slider('Popularity', actor_popularity_low, actor_popularity_high, (25.0, 100.0), 1.0)
-actor_popularity_low, actor_popularity_high = actor_popularity_range
+
+min_actor_popularity, max_actor_popularity = _get_min_max_values(df_merged, 'c_popularity', float)
+
+
+actor_popularity_start, actor_popularity_end = st.sidebar.slider('Popularity', min_actor_popularity, max_actor_popularity, \
+                                           (min_actor_popularity, max_actor_popularity), 1.0)
+
 
 gender_choice = _select_gender(st.sidebar.radio('Gender', ['Everyone', 'Male', 'Female']))
 
 # Filter cast data
-df_masked_cast = _select_cast_data(df_cast, actor_popularity_low, actor_popularity_high, gender_choice)
+df_transformed = _select_cast_data(df_merged, actor_popularity_start, actor_popularity_end, gender_choice)
 
 # Join movie and cast data
-df_cast_movies = join_movies_cast(df_masked_cast, df_masked_movies)
+
 
 # Get nested cast data
-df_nested = _get_nested_cast(df_cast_movies)
+df_nested = _get_nested_cast(df_transformed)
 
 # Generate nested cast combinations
 df_nested['all_combinations'] = df_nested.c_name.apply(_get_nested_cast_combinations)
@@ -129,8 +130,8 @@ selected_actor = col1.selectbox("Select a key", options=list(actor_co_star_dict.
 # Display select box for values in the second column
 selected_costar = col2.selectbox("Select a value", options=actor_co_star_dict[selected_actor])
 
-common_movies = _find_common_movies(df_cast_movies,selected_actor, selected_costar)
+common_movies = _find_common_movies(df_transformed, selected_actor, selected_costar)
 
-paths = _get_poster_paths(df_cast_movies, common_movies)
+paths = _get_poster_paths(df_transformed, common_movies)
 
 display_image_grid(paths)
