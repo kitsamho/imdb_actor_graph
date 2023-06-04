@@ -75,9 +75,10 @@ for visualizing data.
 - collapsing sections of the app interface, enhancing user experience and navigation within the app.
 
 ## Data Sources
-The data used in the Movie Graph Visualization app was sourced from The Movie Database (TMDB). The movie data and cast 
-data were obtained by querying TMDB's API. While the code for querying the API is not included in the provided code 
-snippet, if you find it useful, please feel free to reach out for further assistance.
+The data used in the app was sourced from [The Movie Database (TMDB)](https://developer.themoviedb.org/docs). 
+The movie data and cast data were obtained by querying TMDB's API (which is free to use and no/user friendly limits). 
+While the code for querying the API is not included in the provided code snippet, if you find it useful, please feel 
+free to reach out for further assistance.
 
 
 ## Data Formats
@@ -94,3 +95,18 @@ is from 1990, and the overall dataset is skewed towards the past decade. This li
 through the TMDB API, which may not include comprehensive historical records. However, despite this limitation, 
 the app still offers valuable insights into the relationships and collaborations between actors and movies based 
 on the available data.
+
+
+## Contributions
+
+Contributions to this project are welcome and encouraged. If you have ideas for different features or if there are bugs. 
+
+If you would like to contribute, you can follow these steps:
+
+- Fork the repository on GitHub.
+- Create a new branch with a descriptive name for your contribution.
+- Make your desired changes or additions to the codebase.
+- Test your changes to ensure they are functioning correctly.
+- Commit and push your changes to your forked repository.
+- Open a pull request (PR) against the main repository.
+- Provide a clear and descriptive explanation of your changes in the PR description.
