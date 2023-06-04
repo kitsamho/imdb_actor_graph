@@ -48,8 +48,13 @@ def _get_d3_dataframe(combinations_dict):
     return df_d3
 
 
-def _get_edge_frequency_dict(df_d3):
-    source_counts = df_d3.source.value_counts().to_dict()
-    target_counts = df_d3.target.value_counts().to_dict()
-    result = {key: source_counts.get(key, 0) + target_counts.get(key, 0) for key in source_counts}
-    return result
+def _append_actor_url_to_df_actor_attributes(df_actor_attributes, df_cast_movies, imdb_image_path):
+    df_actor_attributes = df_actor_attributes.merge(df_cast_movies[['c_name', 'c_profile_path']].drop_duplicates \
+                                                        (subset='c_name', keep='first'), left_on='Actor',
+                                                    right_on='c_name').drop(columns='c_name')
+    df_actor_attributes['c_profile_path'] = df_actor_attributes['c_profile_path'].apply(lambda x: imdb_image_path+x)
+    return df_actor_attributes.rename(columns={'c_profile_path': 'image'})
+
+
+
+

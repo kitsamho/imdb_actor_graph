@@ -1,0 +1,36 @@
+DataPaths:
+  data_path: 'cached_data'
+  cast_data: 'cast.pickle'
+  movies_data: 'movies.pickle'
+  temp_html : '_temp_html/d3_graph.html'
+
+IMDBPaths:
+  Images: 'https://image.tmdb.org/t/p/original'
+
+PageInfo:
+  graph_plot: "- The network plot visualizes the relationships between actors, with nodes representing actors and edges 
+  representing their collaborations. The thickness of the edges indicate the frequency of their co-starring appearances.
+
+  - In addition to the connections, the nodes (actors) are assigned colors based on the Louvain clustering algorithm. 
+  Louvain clustering aims to identify communities or groups of closely connected actors within the graph. The assigned 
+  colors help distinguish different clusters and provide insights into the community structure within the actor network.
+  
+  - This plot utilizes the D3Blocks library, which implements a force-directed algorithm to generate 
+  a visually appealing network plot. The force-directed algorithm simulates the behavior of physical forces among 
+  the nodes, arranging them in a way that minimizes edge crossings and maximizes the overall aesthetic of the graph."
+
+  graph_metrics: "- Degree Centrality: Degree centrality measures how connected an actor is by looking at the number of co-stars 
+  they have worked with. Actors with a higher degree centrality value have worked with more co-stars.
+  
+  - Betweenness Centrality: Betweenness centrality quantifies the extent to which an actor acts as a bridge or 
+  intermediary between other actors in the graph. In real terms, an actor who has starred in a number of different 
+  franchises is likely to have a high betweeness centrality.
+  
+  - Eigenvector Centrality: Eigenvector centrality measures the influence of an actor based on both their direct 
+  connections and the connections of their co-stars. Actors with high eigenvector centrality are not only connected to 
+  many other actors but are also connected to other influential actors.
+  
+  - Clustering Coefficient: The clustering coefficient measures the tendency of actors to form tightly-knit groups or 
+  clusters. It quantifies how likely an actor's co-stars are also connected to each other. Actors with high clustering 
+  coefficients are part of cohesive groups within the network."
+
