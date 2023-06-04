@@ -1,10 +1,14 @@
-# IMDB Actor Analysis
+![Image Description](assets/tmdb_logo.png)
 
-The IMDB Actor Analysis streamlit app is a multi tab application that facilitates analysis of Hollywood actors
+
+# TMDB Actor Analysis Streamlit App
+
+The TMDB Actor Analysis streamlit app is a multi tab application that facilitates analysis of Hollywood actors
 based on their collaborations in movies. The app also calculates graph metrics such as centrality measures to provide 
 insights into the importance and connectivity of actors. Additionally, users can explore common movies between selected 
 actors and their co-stars, with movie posters displayed for visual exploration. 
 
+---
 
 ### Graph
 Once the filters are applied, the app generates a graph visualization implementing d3Blocks. 
@@ -27,10 +31,6 @@ In addition to the graph visualization, the app provides a section where users c
 co-stars. The app then displays the movies in which the selected actors and co-stars have appeared together, along with 
 their corresponding movie posters. This feature allows users to discover common movies and explore the filmography of 
 their favorite actors.
-
-Overall, the Movie Graph Visualization app provides a dynamic and interactive way to explore the relationships and 
-collaborations between actors and movies. It enables users to uncover interesting connections, discover common films, 
-and gain insights into the world of cinema.
 
 ## Installation
 
