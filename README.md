@@ -61,16 +61,18 @@ streamlit run app.py
 
 The project structure is as follows:
 
-- The app.py script imports the necessary modules from the common package.
+- The ```app.py``` script imports the necessary modules from the common package.
 - The load module provides functions such as load_cached_file and load_config for loading cached files and configuration 
 data, respectively.
-- The transform module provides classes such as DataLoader, MovieCastTransformer, D3Transformer, and ActorGraphTransformer 
+- The transform module provides classes such as ```DataLoader```, ```MovieCastTransformer```, ```D3Transformer```, and 
+```ActorGraphTransformer```
 for data transformation tasks.
-- The show module offers functions like cache_d3_network_plot, plot_html, display_image_grid, and plot_graph_metrics 
+- The show module offers functions like ```cache_d3_network_plot```, ```plot_html```, ```display_image_grid```, and 
+- ```plot_graph_metrics```
 for visualizing data.
-- The select module provides functions for filtering and selecting specific data.
-- The streamlit_widgets module contributes the custom Streamlit widget st_expander for expanding and collapsing sections 
-of the app interface, enhancing user experience and navigation within the app.
+- The ```select.py``` module provides functions for filtering and selecting specific data.
+- The ```streamlit_widgets.py``` module contributes the custom Streamlit widget ```st_expander``` for expanding and 
+- collapsing sections of the app interface, enhancing user experience and navigation within the app.
 
 ## Data Sources
 The data used in the Movie Graph Visualization app was sourced from The Movie Database (TMDB). The movie data and cast 
