@@ -1,5 +1,4 @@
 import streamlit as st
-
 from common.load import load_cached_file, load_config
 from common.transform import _append_actor_url_to_df_actor_attributes
 from common.transformers import DataLoader, MovieCastTransformer, D3Transformer, ActorGraphTransformer
@@ -10,8 +9,11 @@ from common.streamlit_widgets import st_expander
 # Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Graph Visualisation", "Graph Metrics", "Common Movies", "About"])
+# add logo
+st.sidebar.image('assets/tmdb_logo.png')
 
+# create tabs
+tab1, tab2, tab3, tab4 = st.tabs(["Graph Visualisation", "Graph Metrics", "Common Movies", "About"])
 
 # CONFIG
 config_path = 'common/config.yaml'
@@ -19,7 +21,6 @@ config = load_config(config_path)
 html_temp_file_path = config['DataPaths']['temp_html']
 visualisation_info = config['PageInfo']
 imdb_image_path = config['IMDBPaths']['Images']
-
 
 # LOAD DATA
 loader = DataLoader(config_path=config_path)  # instantiate DataLoader object
