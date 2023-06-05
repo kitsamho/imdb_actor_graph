@@ -2,7 +2,7 @@ DataPaths:
   data_path: 'cached_data'
   cast_data: 'cast.pickle'
   movies_data: 'movies.pickle'
-  temp_html : '_temp_html/d3_graph.html'
+  temp_html : '.temp_html/d3_graph.html'
 
 IMDBPaths:
   Images: 'https://image.tmdb.org/t/p/original'
