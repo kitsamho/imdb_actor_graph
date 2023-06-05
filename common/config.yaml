@@ -34,3 +34,30 @@ PageInfo:
   clusters. It quantifies how likely an actor's co-stars are also connected to each other. Actors with high clustering 
   coefficients are part of cohesive groups within the network."
 
+AboutPage:
+  about: "The TMDB Actor Graph streamlit app is a tool for analyzing Hollywood actors based on their collaborations in 
+  movies. The app allows users to explore the relationships between actors, calculate graph metrics, and discover common 
+  movies between selected actors and their co-stars.
+  
+  - Data Sources: The app utilizes data from The Movie Database (TMDB) by querying TMDB's API. The movie data and cast 
+  data are obtained from TMDB's API, which is free to use and has user-friendly limits.
+
+  - Data Formats:
+  The data is stored in pickled data frames, which are cached locally in the repository. This format provides an 
+  efficient way to store and load the data. For scalability, future improvements could include persisting the data to a 
+  warehouse and implementing relevant queries.
+
+  - Limitations:
+  The data used in the app is limited to the available data through the TMDB API, which may not include comprehensive 
+  historical records. The dataset is skewed towards the past decade, with the earliest available data from 1990. Despite 
+  these limitations, the app still provides valuable insights into actor relationships and collaborations based on the 
+  available data.
+
+  - Note: The code for querying the TMDB API is not included in the repository, but assistance can be provided if 
+  needed."
+  links: ["https://developer.themoviedb.org/docs",
+          "https://d3blocks.github.io/d3blocks/pages/html/index.html",
+          'https://networkx.org/documentation/networkx-1.10/reference/algorithms.centrality.html',
+          "https://www.linkedin.com/in/kitsamho/",
+          "https://kitsamho.github.io/"]
+
