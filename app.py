@@ -21,6 +21,7 @@ config = load_config(config_path)
 html_temp_file_path = config['DataPaths']['temp_html']
 visualisation_info = config['PageInfo']
 imdb_image_path = config['IMDBPaths']['Images']
+about_page_info = config['AboutPage']
 
 # LOAD DATA
 loader = DataLoader(config_path=config_path)  # instantiate DataLoader object
@@ -66,7 +67,7 @@ with tab2:
                                                                              df_merged_transformed, imdb_image_path)
     col1, col2 = st.columns(2)
     options_dict = {'Betweenness Centrality': 'BetweennessCentrality', 'Degree Centrality': 'DegreeCentrality',
-                    'Eigenvector Centrality': 'EigenvectorCentrality','Clustering Coefficient':'ClusteringCoefficient'}
+                    'Eigenvector Centrality': 'EigenvectorCentrality','Clustering Coefficient': 'ClusteringCoefficient'}
 
     marker_size = st.slider('Adjust marker size', 1, 50, 5)
     x_axis = col1.selectbox("Select metric for x axis", options=sorted(list(options_dict.keys())))
@@ -88,4 +89,14 @@ with tab3:
     paths = get_poster_paths(df_merged_transformed, common_movies, imdb_image_path)
     display_image_grid(paths)
 
+with tab4:
+    st.header('About')
+    st.markdown(about_page_info['about'])
+    st.subheader('Links')
+    st.write(f'TMDB : {about_page_info["links"][0]}')
+    st.write(f'd3Blocks : {about_page_info["links"][1]}')
+    st.write(f'NetworkX : {about_page_info["links"][2]}')
+    st.subheader('Contact')
+    st.write(f'LinkedIn : {about_page_info["links"][3]}')
+    st.write(f'Blog : {about_page_info["links"][4]}')
 
