@@ -41,10 +41,10 @@ git clone https://github.com/your-username/movie-graph-visualization.git
 cd movie-graph-visualization
 ```
 
-2. Create a python 3.1 environment
+2. Create a python 3.10.10 environment
 
 ```
-conda create --name imdb_actor_graph python=3.10
+conda create --name imdb_actor_graph python=3.10.10
 ```
 
 3. Install requirements
