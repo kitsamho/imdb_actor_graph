@@ -1,4 +1,4 @@
-![Image Description](assets/tmdb_logo.png)
+![Image Description](assets/hollywood.jpeg)
 
 
 # TMDB Actor Graph Streamlit App
