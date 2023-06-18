@@ -28,6 +28,11 @@ import tmdbsimple as tmdb
 import pandas as pd
 ```
 
+Assign API key to tmdb
+```
+tmdb.API = # your key here
+```
+
 Instantiate the TMDBMovieScraper class and call the `get_movies` method to retrieve movie data:
 ```
 movies = TMDBMovieScraper(years_check=[2022,2023])
