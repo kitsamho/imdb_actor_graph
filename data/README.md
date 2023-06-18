@@ -30,15 +30,15 @@ import pandas as pd
 
 Instantiate the TMDBMovieScraper class and call the `get_movies` method to retrieve movie data:
 ```
-movie_scraper = TMDBMovieScraper(years_check=[2019, 2020, 2021])
-df_movies = scraper.get_movies()
+movies = TMDBMovieScraper(years_check=[2022,2023])
+df_movies = movies.get_movies()
 ```
 
 Instantiate the TMDBCastCrewScraper class and provide a list of movie IDs from the df_movies dataframe
 
 ```
-cast_crew_scraper = TMDBCastCrewScraper(movie_ids=df_movies.index)
-cast_crew_scraper.get_cast_crew()
+cast = TMDBCastCrewScraper(df_movies.index)
+df_cast = cast.get_cast_crew()
 ```
 
 ### Multithreading
