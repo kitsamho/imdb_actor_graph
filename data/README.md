@@ -18,7 +18,7 @@ handling HTTP requests and authentication
 
 Information on how to get an API key can be found at [The Movie Database (TMDB)](https://developer.themoviedb.org/docs). 
 The API is free to use and has user-friendly rate limiting. 
----
+
 
 ### Usage
 
