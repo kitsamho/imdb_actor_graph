@@ -10,7 +10,7 @@ from common.streamlit_widgets import st_expander
 st.set_page_config(layout="wide")
 
 # add logo
-st.sidebar.image('assets/tmdb_logo.png')
+st.sidebar.image('assets/tmdb_logo.png',width=200)
 
 # create tabs
 tab1, tab2, tab3, tab4 = st.tabs(["Graph Visualisation", "Graph Metrics", "Common Movies", "About"])
@@ -71,7 +71,7 @@ with tab2:
 
     marker_size = st.slider('Adjust marker size', 1, 50, 5)
     x_axis = col1.selectbox("Select metric for x axis", options=sorted(list(options_dict.keys())))
-    y_axis = col2.selectbox("Select metric for y axis", options=sorted(list(options_dict.keys())))
+    y_axis = col2.selectbox("Select metric for y axis", options=reversed(list(options_dict.keys())))
 
     plot = plot_graph_metrics(df_actor_graph_attributes_url,
                               options_dict[x_axis],
