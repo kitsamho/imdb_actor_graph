@@ -1,7 +1,7 @@
-![Image Description](./assets/hollywood.jpeg)
+![Image Description](../streamlit_app/assets/tmdb_logo.png)
+---
 
-
-## TMDB Movie Data Scraper
+## TMDB Movie Data 
 
 This folder contains code for querying movie data from the TMDB (The Movie Database) API. 
 It includes two classes: `TMDBMovieScraper` and `TMDBCastCrewScraper`. The TMDBMovieScraper class is responsible for 
@@ -10,7 +10,7 @@ for movies.
 
 ### tmdbsimple
 
-When building these classes, we implemented the [tmdsimple](https://github.com/celiao/tmdbsimple) library, which 
+When building these classes, we implemented the [tmdbsimple](https://github.com/celiao/tmdbsimple) library, which 
 provided convenient methods for accessing TMDB API endpoints. This library simplifies the process of retrieving data by 
 handling HTTP requests and authentication
 
@@ -18,8 +18,9 @@ handling HTTP requests and authentication
 
 Information on how to get an API key can be found at [The Movie Database (TMDB)](https://developer.themoviedb.org/docs). 
 The API is free to use and has user-friendly rate limiting. 
+---
 
-## Usage
+### Usage
 
 Import the necessary modules
 ```
@@ -31,7 +32,6 @@ Instantiate the TMDBMovieScraper class and call the `get_movies` method to retri
 ```
 movie_scraper = TMDBMovieScraper(years_check=[2019, 2020, 2021])
 df_movies = scraper.get_movies()
-
 ```
 
 Instantiate the TMDBCastCrewScraper class and provide a list of movie IDs from the df_movies dataframe
@@ -41,7 +41,7 @@ cast_crew_scraper = TMDBCastCrewScraper(movie_ids=df_movies.index)
 cast_crew_scraper.get_cast_crew()
 ```
 
-#### Multithreading
+### Multithreading
 
 Both classes implement multithreading to speed up the data retrieval process. The number of threads can be 
 controlled by adjusting the max_threads parameter.
