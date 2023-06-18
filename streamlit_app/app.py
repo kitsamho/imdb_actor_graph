@@ -3,14 +3,14 @@ from common.load import load_cached_file, load_config
 from common.transform import _append_actor_url_to_df_actor_attributes
 from common.transformers import DataLoader, MovieCastTransformer, D3Transformer, ActorGraphTransformer
 from common.show import cache_d3_network_plot, plot_html, display_image_grid, plot_graph_metrics
-from common.select import mask_on_actor_edge_frequency, get_actor_co_star_dict, get_poster_paths, find_common_movies
+from common.selection import mask_on_actor_edge_frequency, get_actor_co_star_dict, get_poster_paths, find_common_movies
 from common.streamlit_widgets import st_expander
 
 # Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
 # add logo
-st.sidebar.image('assets/tmdb_logo.png',width=200)
+st.sidebar.image('assets/tmdb_logo.png', width=200)
 
 # create tabs
 tab1, tab2, tab3, tab4 = st.tabs(["Graph Visualisation", "Graph Metrics", "Common Movies", "About"])

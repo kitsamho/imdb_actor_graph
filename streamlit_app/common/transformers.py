@@ -2,11 +2,10 @@ import streamlit as st
 import networkx as nx
 import pandas as pd
 import os
-import yaml
 
-from common.load import load_config
-from common.select import select_gender, mask_range, select_movie_data, select_cast_data, get_min_max_values
-from common.transform import _get_nested_cast, _get_nested_cast_combinations, _flatten_nested_cast_combinations, \
+from .load import load_config
+from .selection import select_gender, mask_range, select_movie_data, select_cast_data, get_min_max_values
+from .transform import _get_nested_cast, _get_nested_cast_combinations, _flatten_nested_cast_combinations, \
     _get_combinations_dict, _get_d3_dataframe, join_movies_cast
 
 
@@ -16,7 +15,7 @@ class DataLoader:
         DataLoader class for loading movie and cast data.
 
         Args:
-            config_file (str): Path to the YAML config file. Default is 'config.yaml'.
+            config_path (str): Path to the YAML config file. Default is 'config.yaml'.
         """
         self.config_path = config_path
         self.data_path = None
@@ -182,10 +181,12 @@ class MovieCastTransformer:
         """
         # Filter movie data based on year and average rating
         self.merged_df = mask_range(self.merged_df, 'm_release_year', self.year_start, self.year_end)
-        self.merged_df = select_movie_data(self.merged_df, self.year_start, self.year_end, self.vote_start, self.vote_end)
+        self.merged_df = select_movie_data(self.merged_df, self.year_start, self.year_end, self.vote_start,
+                                           self.vote_end)
 
         # Filter cast data based on actor popularity and gender
-        self.merged_df = select_cast_data(self.merged_df, self.popularity_start, self.popularity_end, self.gender_choice)
+        self.merged_df = select_cast_data(self.merged_df, self.popularity_start, self.popularity_end,
+                                          self.gender_choice)
 
         # Perform any additional data processing or transformations
 
@@ -209,7 +210,7 @@ class D3Transformer:
     Class to handle the transformation of processed data.
 
     Parameters:
-        processed_df (pandas.DataFrame): The processed dataframe.
+        df_transformed (pandas.DataFrame): The processed dataframe.
 
     """
 
