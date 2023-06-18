@@ -79,9 +79,6 @@ The data used in the app was sourced from [The Movie Database (TMDB)](https://de
 The movie data and cast data were obtained by querying TMDB's API (which is free to use and has very user-friendly
 limits). 
 
-While the code for querying the API is not included in this repository, if you would like access to this please feel 
-free to reach out for further assistance.
-
 
 ## Data Formats
 The data is stored in pickled data frames, which are cached locally in the repository. This format was chosen as it 
