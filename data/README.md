@@ -30,7 +30,7 @@ import pandas as pd
 
 Assign API key to tmdb
 ```
-tmdb.API = # your key here
+tmdb.API_KEY = # your key here
 ```
 
 Instantiate the TMDBMovieScraper class and call the `get_movies` method to retrieve movie data:
