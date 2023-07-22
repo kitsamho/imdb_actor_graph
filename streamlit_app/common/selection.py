@@ -50,8 +50,8 @@ def get_min_max_values(df: pd.DataFrame, col: str, number_type: type) -> tuple:
     return min_value, max_value
 
 
-def select_movie_data(df_movies: pd.DataFrame, year_start: Optional[int] = None, year_end: Optional[int] = None,
-                      vote_low: Optional[Union[int, float]] = None, vote_high: Optional[Union[int, float]] = None) -> pd.DataFrame:
+def select_movie_data(df_movies: pd.DataFrame, year_start: Optional[int] = None,
+                      year_end: Optional[int] = None) -> pd.DataFrame:
     """
     Select movie data from a DataFrame based on specified criteria.
 
@@ -59,17 +59,12 @@ def select_movie_data(df_movies: pd.DataFrame, year_start: Optional[int] = None,
         df_movies: The DataFrame containing movie data.
         year_start: The start year of the movies.
         year_end: The end year of the movies.
-        vote_low: The lower bound of the movie vote average.
-        vote_high: The upper bound of the movie vote average.
 
     Returns:
         The filtered DataFrame.
     """
     if year_start:
         df_movies = mask_range(df_movies, 'm_release_year', year_start, year_end)
-    if vote_low:
-        df_movies = mask_range(df_movies, 'm_vote_average', vote_low, vote_high)
-
     return df_movies
 
 
@@ -92,22 +87,17 @@ def select_gender(gender_choice: str) -> Union[float, None]:
     return gender_mask
 
 
-def select_cast_data(df_cast: pd.DataFrame, popularity_low: Optional[Union[int, float]] = None,
-                     popularity_high: Optional[Union[int, float]] = None, gender: Optional[float] = None) -> pd.DataFrame:
+def select_cast_data(df_cast: pd.DataFrame, gender: Optional[float] = None) -> pd.DataFrame:
     """
     Select cast data from a DataFrame based on specified criteria.
 
     Args:
         df_cast: The DataFrame containing cast data.
-        popularity_low: The lower bound of the cast popularity.
-        popularity_high: The upper bound of the cast popularity.
         gender: The selected gender.
 
     Returns:
         The filtered DataFrame.
     """
-    if popularity_low:
-        df_cast = mask_range(df_cast, 'c_popularity', popularity_low, popularity_high)
     if gender:
         df_cast = mask_value(df_cast, 'c_gender', gender)
     return df_cast

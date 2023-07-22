@@ -109,10 +109,6 @@ class MovieCastTransformer:
         merged_df (pandas.DataFrame): The merged dataframe containing movie and cast data.
         year_start (int): The start year selected by the user.
         year_end (int): The end year selected by the user.
-        vote_start (float): The start average rating selected by the user.
-        vote_end (float): The end average rating selected by the user.
-        popularity_start (float): The start popularity value selected by the user.
-        popularity_end (float): The end popularity value selected by the user.
         gender_choice (str): The gender choice selected by the user.
 
     """
@@ -120,8 +116,6 @@ class MovieCastTransformer:
     def __init__(self, merged_df):
         self.merged_df = merged_df
         self.year_start, self.year_end = self.__get_year_range()
-        self.vote_start, self.vote_end = self.__get_vote_range()
-        self.popularity_start, self.popularity_end = self.__get_popularity_range()
         self.gender_choice = self.__select_gender()
 
     def __get_year_range(self):
@@ -136,33 +130,6 @@ class MovieCastTransformer:
         min_year, max_year = get_min_max_values(self.merged_df, 'm_release_year', int)
         year_start, year_end = st.sidebar.slider('Year of release', min_year, max_year, (2018, 2023), 1)
         return year_start, year_end
-
-    def __get_vote_range(self):
-        """
-        Get the range of movie ratings selected by the user.
-
-        Returns:
-            Tuple[float, float]: The start and end average rating selected by the user.
-
-        """
-        min_vote, max_vote = get_min_max_values(self.merged_df, 'm_vote_average', float)
-        vote_start, vote_end = st.sidebar.slider('Average movie rating', min_vote, max_vote, (6.0, max_vote), 0.1)
-        return vote_start, vote_end
-
-    def __get_popularity_range(self):
-        """
-        Get the range of actor popularity selected by the user.
-
-        Returns:
-            Tuple[float, float]: The start and end popularity value selected by the user.
-
-        """
-        st.sidebar.markdown('---')
-        st.sidebar.subheader('Actor Filters')
-        min_popularity, max_popularity = get_min_max_values(self.merged_df, 'c_popularity', float)
-        popularity_start, popularity_end = st.sidebar.slider('Popularity', min_popularity, max_popularity,
-                                                             (min_popularity, max_popularity), 1.0)
-        return popularity_start, popularity_end
 
     def __select_gender(self):
         """
@@ -181,12 +148,10 @@ class MovieCastTransformer:
         """
         # Filter movie data based on year and average rating
         self.merged_df = mask_range(self.merged_df, 'm_release_year', self.year_start, self.year_end)
-        self.merged_df = select_movie_data(self.merged_df, self.year_start, self.year_end, self.vote_start,
-                                           self.vote_end)
+        self.merged_df = select_movie_data(self.merged_df, self.year_start, self.year_end)
 
         # Filter cast data based on actor popularity and gender
-        self.merged_df = select_cast_data(self.merged_df, self.popularity_start, self.popularity_end,
-                                          self.gender_choice)
+        self.merged_df = select_cast_data(self.merged_df, self.gender_choice)
 
         # Perform any additional data processing or transformations
 
@@ -207,7 +172,7 @@ class MovieCastTransformer:
 
 class D3Transformer:
     """
-    Class to handle the transformation of processed data.
+    Class to handle the transformation of processed data into a shape that can be used by the d3blocks network graph
 
     Parameters:
         df_transformed (pandas.DataFrame): The processed dataframe.
@@ -301,7 +266,33 @@ class D3Transformer:
 
 
 class ActorGraphTransformer:
+    """
+    A class for transforming a DataFrame into an actor graph and calculating various graph metrics.
+
+    Attributes:
+        df_d3 (pandas.DataFrame): The input DataFrame containing the graph data.
+        graph (networkx.Graph): The graph representation of the DataFrame.
+        actor_graph_metrics_df (pandas.DataFrame): DataFrame containing the calculated graph metrics for each actor.
+        actor_graph_metrics_dict (dict): Dictionary containing the graph metrics for each actor.
+        edge_frequency_dict (dict): Dictionary containing the frequency of edges in the graph.
+
+    Methods:
+        __create_graph(): Create a graph from the DataFrame.
+        __create_graph_df(): Calculate various graph metrics for each actor and return a DataFrame.
+        __create_actor_metrics_dict(): Create a dictionary of graph metrics for each actor.
+        __get_edge_frequency_dict(): Calculate the frequency of edges in the graph.
+        get_actor_graph_metrics_df(): Get the DataFrame containing graph metrics for each actor.
+        get_actor_graph_metrics_dict(): Get the dictionary of graph metrics for each actor.
+        get_edge_frequency_dict(): Get the dictionary containing the frequency of edges in the graph.
+    """
+
     def __init__(self, df_d3):
+        """
+        Initialize the ActorGraphTransformer class.
+
+        Args:
+            df_d3 (pandas.DataFrame): The input DataFrame containing the graph data.
+        """
         self.df_d3 = df_d3
         self.graph = self.__create_graph()
         self.actor_graph_metrics_df = self.__create_graph_df()
@@ -309,6 +300,15 @@ class ActorGraphTransformer:
         self.edge_frequency_dict = self.__get_edge_frequency_dict()
 
     def __create_graph(self):
+        """
+        Create a graph from the DataFrame.
+
+        Returns:
+            networkx.Graph: The graph representation of the DataFrame.
+
+        Raises:
+            ValueError: If an error occurs while creating the graph.
+        """
         try:
             graph = nx.from_pandas_edgelist(self.df_d3, 'source', 'target', 'weight')
             return graph
@@ -316,6 +316,15 @@ class ActorGraphTransformer:
             raise ValueError("Error creating the graph: " + str(e))
 
     def __create_graph_df(self):
+        """
+        Calculate various graph metrics for each actor and return a DataFrame.
+
+        Returns:
+            pandas.DataFrame: DataFrame containing the calculated graph metrics for each actor.
+
+        Raises:
+            ValueError: If an error occurs while creating the actor attributes DataFrame.
+        """
         try:
             actor_attributes = pd.DataFrame(index=self.graph.nodes)
 
@@ -329,6 +338,15 @@ class ActorGraphTransformer:
             raise ValueError("Error creating actor attributes: " + str(e))
 
     def __create_actor_metrics_dict(self):
+        """
+        Create a dictionary of graph metrics for each actor.
+
+        Returns:
+            dict: Dictionary containing the graph metrics for each actor.
+
+        Raises:
+            ValueError: If an error occurs while creating the actor metrics dictionary.
+        """
         try:
             actor_dict = {}
             for actor, attributes in self.actor_graph_metrics_df.iterrows():
@@ -338,6 +356,15 @@ class ActorGraphTransformer:
             raise ValueError("Error creating actor metrics dictionary: " + str(e))
 
     def __get_edge_frequency_dict(self):
+        """
+        Calculate the frequency of edges in the graph.
+
+        Returns:
+            dict: Dictionary containing the frequency of edges in the graph.
+
+        Raises:
+            ValueError: If an error occurs while getting the edge frequency dictionary.
+        """
         try:
             source_counts = self.df_d3['source'].value_counts().to_dict()
             target_counts = self.df_d3['target'].value_counts().to_dict()
@@ -347,11 +374,30 @@ class ActorGraphTransformer:
             raise ValueError("Error getting edge frequency dictionary: " + str(e))
 
     def get_actor_graph_metrics_df(self):
+        """
+        Get the DataFrame containing graph metrics for each actor.
+
+        Returns:
+            pandas.DataFrame: DataFrame containing graph metrics for each actor.
+        """
         return self.actor_graph_metrics_df
 
     def get_actor_graph_metrics_dict(self):
+        """
+        Get the dictionary of graph metrics for each actor.
+
+        Returns:
+            dict: Dictionary containing graph metrics for each actor.
+        """
         return self.actor_graph_metrics_dict
 
     def get_edge_frequency_dict(self):
+        """
+        Get the dictionary containing the frequency of edges in the graph.
+
+        Returns:
+            dict: Dictionary containing the frequency of edges in the graph.
+        """
         return self.edge_frequency_dict
+
 
