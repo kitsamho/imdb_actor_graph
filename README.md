@@ -1,4 +1,4 @@
-![Image Description](assets/hollywood.jpeg)
+![Image Description](./streamlit_app/assets/hollywood.jpeg)
 
 
 # TMDB Actor Graph Streamlit App

@@ -30,7 +30,7 @@ df_merged = loader.get_df_merged()  # get the merged dataframe
 
 # SELECT DATA
 trf = MovieCastTransformer(df_merged)  # instantiate MovieCastTransformer object
-df_merged_transformed = trf.transform_data() # transform the merged dataframe
+df_merged_transformed = trf.transform_data()  # transform the merged dataframe
 
 # TRANSFORM / FORMAT
 d3_trf = D3Transformer(df_merged_transformed)
@@ -67,7 +67,7 @@ with tab2:
                                                                              df_merged_transformed, imdb_image_path)
     col1, col2 = st.columns(2)
     options_dict = {'Betweenness Centrality': 'BetweennessCentrality', 'Degree Centrality': 'DegreeCentrality',
-                    'Eigenvector Centrality': 'EigenvectorCentrality','Clustering Coefficient': 'ClusteringCoefficient'}
+                    'Eigenvector Centrality': 'EigenvectorCentrality', 'Clustering Coefficient': 'ClusteringCoefficient'}
 
     marker_size = st.slider('Adjust marker size', 1, 50, 5)
     x_axis = col1.selectbox("Select metric for x axis", options=sorted(list(options_dict.keys())))
@@ -83,8 +83,8 @@ with tab3:
     st.header('Common Movies')
     actor_co_star_dict = get_actor_co_star_dict(df_d3_to_plot)
     col1, col2 = st.columns(2)
-    selected_actor = col1.selectbox("Select a key", options=sorted(list(actor_co_star_dict.keys())), key="actor_selectbox")
-    selected_costar = col2.selectbox("Select a value", options=sorted(actor_co_star_dict[selected_actor]), key="costar_selectbox")
+    selected_actor = col1.selectbox("Select an actor", options=sorted(list(actor_co_star_dict.keys())), key="actor_selectbox")
+    selected_costar = col2.selectbox("Select an actor", options=sorted(actor_co_star_dict[selected_actor]), key="costar_selectbox")
     common_movies = find_common_movies(df_merged_transformed, selected_actor, selected_costar)
     paths = get_poster_paths(df_merged_transformed, common_movies, imdb_image_path)
     display_image_grid(paths)

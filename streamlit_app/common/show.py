@@ -24,7 +24,7 @@ def cache_d3_network_plot(df_d3_masked: pd.DataFrame, file_path: str, edge_dista
     d3.D3graph.show(filepath=file_path)
 
 
-def plot_html(cached_html: str, image_size: Tuple[int, int] = (950, 550)) -> None:
+def plot_html(cached_html: str, image_size: Tuple[int, int] = (950, 800)) -> None:
     """
     Displays a cached HTML plot in Streamlit.
 
