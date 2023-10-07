@@ -10,7 +10,7 @@ from common.streamlit_widgets import st_expander
 st.set_page_config(layout="wide")
 
 # add logo
-st.sidebar.image('assets/tmdb_logo.png', width=200)
+# st.sidebar.image('assets/tmdb_logo.png', width=200)
 
 # create tabs
 tab1, tab2, tab3, tab4 = st.tabs(["Graph Visualisation", "Graph Metrics", "Common Movies", "About"])
