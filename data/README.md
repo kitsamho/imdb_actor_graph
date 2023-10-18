@@ -1,4 +1,4 @@
-![Image Description](../streamlit_app/assets/tmdb_logo.png)
+![Image Description](../assets/tmdb_logo.png)
 ---
 
 ## TMDB Movie Data 
