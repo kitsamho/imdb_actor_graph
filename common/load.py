@@ -33,16 +33,23 @@ def load_cached_file(save_path: str) -> str:
     return file
 
 
+# def load_config(path: str) -> Dict:
+#     """
+#     Load a YAML configuration file.
+#
+#     Args:
+#         path: Path to the YAML configuration file.
+#
+#     Returns:
+#         The loaded configuration data as a dictionary.
+#     """
+#     with open(path, 'r') as f:
+#         config_data = yaml.safe_load(f)
+#     return config_data
+
+@st.cache_data
 def load_config(path: str) -> Dict:
-    """
-    Load a YAML configuration file.
 
-    Args:
-        path: Path to the YAML configuration file.
-
-    Returns:
-        The loaded configuration data as a dictionary.
-    """
-    with open(path, 'r') as f:
-        config_data = yaml.safe_load(f)
-    return config_data
+    with open(path, 'r') as config_file:
+        yml_file = yaml.load(config_file, Loader=yaml.FullLoader)
+    return yml_file
