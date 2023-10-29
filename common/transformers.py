@@ -130,6 +130,7 @@ class MovieCastTransformer:
         min_year, max_year = get_min_max_values(self.merged_df, 'm_release_year', int)
         year_start, year_end = st.sidebar.slider('Year of release <br> (caution - wide time frames are computationally'
                                                  'intensive)', min_year, max_year, (2021, 2023), 1)
+
         return year_start, year_end
 
     def __select_gender(self):
